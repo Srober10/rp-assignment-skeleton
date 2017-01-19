@@ -1,35 +1,50 @@
 package rp.assignments.individual.ex1;
 
+import lejos.nxt.Motor;
+import lejos.robotics.navigation.DifferentialPilot;
 import rp.robotics.DifferentialDriveRobot;
 import rp.robotics.MobileRobot;
 import rp.systems.StoppableRunnable;
 
 /**
+
+ * Using interior angle be the angle needed 
+ * to turn for each shape. Pentagons have 5 sides, so 360/ 5 = 72
  * 
- * A placeholder to show you how you could start writing a controller for the
- * first part of the first individual assignment (creating a controller which
- * drives in a pentagon). Note that you don't have to follow this structure for
- * your controller as there are more elegant and efficient (at least in terms of
- * numbers of lines of code) in which you can implement the different shape
- * controllers.
- * 
- * @author Nick Hawes
+ * @author Suki
  *
  */
 public class PentagonController implements StoppableRunnable {
+	
+	private boolean running = false;
+	private final DifferentialPilot m_pilot;
+	private final int interiorAngle = 360/5; //5 is number of sides. 72
+	
+	private float sideLength;
 
 	public PentagonController(DifferentialDriveRobot robot, float sideLength) {
-		// TODO Auto-generated method stub
+		
+		m_pilot = robot.getDifferentialPilot(); // gets the movement pilot
+		this.sideLength = sideLength;
 	}
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
+		running = true;
+		
+		while(running){ // keeps looping until stop is called, will make a full pentagon each time.
+	for( int i= 0; i <5 ; i++){ //pentagon has 5 sides 
+			m_pilot.travel(sideLength);
+			m_pilot.rotate(interiorAngle);
+			
+			
+			}
+		}
 	}
 
 	@Override
 	public void stop() {
-		// TODO Auto-generated method stub
+		running = false;
 	}
 
 }

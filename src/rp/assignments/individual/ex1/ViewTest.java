@@ -35,7 +35,9 @@ public class ViewTest {
 		Ex1Tests tests = new Ex1Tests();
 		// Create the test object plus the controller for the test (via
 		// SolutionFactory)
-		RobotTest<?> test = tests.createPentagonTest();
+		//RobotTest<?> test = tests.createPentagonTest();
+		//RobotTest<?> test = tests.createOctagonTest();
+		RobotTest<?> test = tests.createBumperTest(); //part 2 
 		// Create the visualisation of the test, then run everything
 		TestViewer demo = new TestViewer(test, test.getSimulation());
 		demo.run();
@@ -53,7 +55,9 @@ public class ViewTest {
 		Ex1Tests tests = new Ex1Tests();
 		// Create the test object plus the controller for the test (via
 		// SolutionFactory)
-		RobotTest<?> test = tests.createPentagonTest();
+		//RobotTest<?> test = tests.createPentagonTest();
+		//RobotTest<?> test = tests.createOctagonTest();
+		RobotTest<?> test = tests.createBumperTest(); //part 2 
 		test.run();
 	}
 
@@ -92,8 +96,8 @@ public class ViewTest {
 		// robot. We pass it the robot object from the simulator.
 		// It is important to note that this controller could also be used with
 		// a real robot provided you have a configuration object to describe it.
-		PentagonController controller = new PentagonController(
-				wrapper.getRobot(), 0.5f);
+		BumperController controller = new BumperController(  //change this to xController
+				wrapper.getRobot());
 
 		// Manually create the touch sensor if we need one.
 		if (withTouchSensor) {
@@ -111,7 +115,9 @@ public class ViewTest {
 
 		// Get the sequence of zones to visit. You could replace this with your
 		// own list of zones.
-		ZoneSequence sequence = Ex1Tests.getPentagonTestSequence();
+		//ZoneSequence sequence = Ex1Tests.getOctagonTestSequence();
+		//dont need this for p2?? 
+		ZoneSequence sequence = Ex1Tests.getBumperSequence(); //works?
 
 		// Create a test from these zones, the controller, and the robot to run
 		// it on

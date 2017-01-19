@@ -54,7 +54,7 @@ public class IndividualAssignment1Simulation {
 		PentagonController controller = new PentagonController(
 				wrapper.getRobot(), 0.5f);
 
-		// This call attaches theevent listener implemented by the controller
+		// This call attaches the event listener implemented by the controller
 		// to the touch sensor on the simulated robot
 		// Note that this will only compile if you controller implements
 		// TouchSensorListener (see RandomWalkController for an example)

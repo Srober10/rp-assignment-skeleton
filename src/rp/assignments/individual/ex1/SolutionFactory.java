@@ -48,7 +48,7 @@ public class SolutionFactory {
 		return new BumperController(_robot);
 	}
 
-	public static TouchSensorEventSource createVirtualBumper(
+	public static EventBasedTouchSensor createVirtualBumper(
 			RangeFinderDescription _desc, RangeFinder _ranger, Float _touchRange) {
 		return new VirtualBumper( _desc, _ranger, _touchRange );
 	}

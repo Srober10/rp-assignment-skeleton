@@ -33,12 +33,10 @@ public class OctagonController implements StoppableRunnable {
 		running = true;
 		
 		while(running){ // keeps looping until stop is called, will make a full pentagon each time.
-	for( int i= 0; i <8 ; i++){ //pentagon has 5 sides 
+	
 			m_pilot.travel(sideLength);
 			m_pilot.rotate(interiorAngle);
-			
-			
-			}
+		
 		}
 	}
 

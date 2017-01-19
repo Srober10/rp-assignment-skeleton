@@ -32,12 +32,10 @@ public class NonagonController implements StoppableRunnable {
 	public void run() {
 		running = true;
 		
-		while(running){ // keeps looping until stop is called, will make a full nonagon each time.
-	for( int i= 0; i <9 ; i++){ //9 times for each side
+		while(running){ // 
+	
 			m_pilot.travel(sideLength);
 			m_pilot.rotate(interiorAngle);			
-			
-			}
 		}
 	}
 

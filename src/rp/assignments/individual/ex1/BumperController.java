@@ -54,11 +54,13 @@ public class BumperController implements ControllerWithTouchSensor {
 
 			if (m_bumped) {
 				m_pilot.stop();
-				m_pilot.travel(-0.3); // moves back only a short way before turning. (map must be bigger than this reverse distance)
+				m_bumped = false;				
+				m_pilot.travel(-0.2);	// moves back only a short way before turning. (map must be bigger than this reverse distance)
+				m_pilot.stop();
 				m_pilot.rotate(180);
 				m_pilot.forward();
 
-				m_bumped = false;
+				
 			}
 			
 		}

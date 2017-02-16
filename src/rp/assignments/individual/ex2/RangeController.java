@@ -48,7 +48,7 @@ public class RangeController implements StoppableRunnable {
 		robot = _robot;
 		pilot = robot.getDifferentialPilot();
 		maxTravelSpeed = robot.getDifferentialPilot().getMaxTravelSpeed();
-		idealDistance = maxDistance / 2;
+		idealDistance = Math.max(maxDistance / 2 , maxDistance - rangeNoise);
 	}
 
 	@Override
@@ -62,23 +62,23 @@ public class RangeController implements StoppableRunnable {
 		running = true;
 
 		medianSpeed = estimateSpeed();
-		System.out.println(medianSpeed);
+		
 		pilot.setTravelSpeed(Math.abs(Math.max(proportionalSpeed(), maxTravelSpeed)));
-		System.out.println("speed is :" + pilot.getTravelSpeed());
+		System.out.println("speed is :" + pilot.getTravelSpeed() + "idealDistance is" + idealDistance);
 		pilot.forward();
 		// while robot is < maxDistance, speed it up.
 		while (running) {
 
 			while (ranger.getRange() >= maxDistance) {
 				pilot.setTravelSpeed(maxTravelSpeed);
-				r.sleep();
+				Delay.msDelay(100);
 			}
-			pilot.setTravelSpeed(medianSpeed); // keep at this estimate speed,
-												// always overestimates slightly
+			pilot.setTravelSpeed(medianSpeed); // not very useful if speed changes, otherwise helpful
+			//System.out.println(medianSpeed);								
 
 			while (ranger.getRange() < idealDistance) { // robot is faster, set
 														// speed to proportional
-				System.out.println("proportional speed set");
+				//System.out.println("proportional speed set");
 				pilot.setTravelSpeed(proportionalSpeed());
 				Delay.msDelay(100);
 
@@ -93,7 +93,7 @@ public class RangeController implements StoppableRunnable {
 	public double proportionalSpeed() {
 
 		double objectDistance1 = ranger.getRange();
-		double k = 0.4; // something to turn a range of 0-155 within 0 - 0.4
+		double k = 0.4; // something to turn a range of the maxrange - minrange within 0 - 0.4
 		double speed = (objectDistance1 - minRange) / (maxRange - minRange) * k;
 		return Math.abs(Math.min(speed, maxTravelSpeed));
 
